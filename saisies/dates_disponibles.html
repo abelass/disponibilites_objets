@@ -1,0 +1,55 @@
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+#SET{date_actuelle,#ENV{date}}
+#SET{dates,#ARRAY}
+
+#SET{_date_actuelle,#GET{date_actuelle}}
+
+[(#ENV{horaire}|non)
+	#SET{_date_actuelle,#GET{date_actuelle}|affdate{Y-m-d}}
+]
+
+[(#ENV{multiple}|oui)
+	#SET{_date_actuelle,#ARRAY{#GET{date_actuelle}}
+]
+
+#SET{date_defaut, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{_date_actuelle}}}}
+
+<BOUCLE_disponibilite_dates(DISPONIBILITE_DATES disponibilite_dates_liens)
+		{date_fin <= #ENV{date_limite,31-12-2018}}
+		{date_fin > #GET{date_actuelle}}
+		{id_disponibilite_date?}
+		{objet?}
+		{id_objet?}
+		{recherche?}
+		{tout}
+		{par num titre, titre}>
+			[(#DATE_DEBUT|!={#DATE_FIN}|?{
+				#SET{nombre_dates,#GET{date_actuelle}|dates_intervalle{#DATE_FIN,#ENV{debut,0},#ENV{fin,0},#ENV{horaire}}}
+				#SET{dates,#GET{dates}|array_merge{#GET{nombre_dates}}}
+				,
+				[(#DATE_DEBUT|>={#GET{date_actuelle}}|oui)
+					[(#ENV{horaire}|?{
+						#SET{dates,#GET{dates}|push{#DATE_DEBUT}},
+						#SET{dates,#GET{dates}|push{#DATE_DEBUT|affdate{Y-m-d}}}
+					})]
+				]
+			})]
+</BOUCLE_disponibilite_dates>
+
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+	<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_dates(DATA) {source tableau, #GET{dates}|array_unique} {par valeur} >
+		#SET{date,#VALEUR}
+		[(#ENV{multiple}|oui)
+		<option value="#GET{date}"[(#GET{date}|in_array{#GET{date_defaut}}|oui) selected="selected"]>
+			[(#VALEUR|affdate_court)]
+		</option>]
+	[(#ENV{multiple}|non)
+		<option value="#GET{date}"[(#GET{date}|=={#GET{date_defaut}}|oui) selected="selected"]>
+		[(#VALEUR|affdate_court)]
+		</option>]
+	</BOUCLE_dates>
+</select>
