@@ -11,8 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objets_disponibilites_titre' => 'Disponibilites objets',
 
 	// C
-	'cfg_exemple' => 'Exemple',
-	'cfg_exemple_explication' => 'Explication de cet exemple',
+	'champ_chambres_objets' => 'Activer l’ajout d\'informations extras sur les contenus :',
 	'cfg_titre_parametrages' => 'Paramétrages',
 
 	// T

@@ -13,13 +13,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /*
  * Un fichier de pipelines permet de regrouper
  * les fonctions de branchement de votre plugin
  * sur des pipelines existants.
  */
-
 
 
 /**
@@ -31,18 +29,21 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array       Données du pipeline
  */
 function objets_disponibilites_affiche_milieu($flux) {
+	include_spip('inc/config');
 	$texte = '';
 	$e = trouver_objet_exec($flux['args']['exec']);
+	$objets_cibles = lire_config('objets_disponibilites/objets', array());
 
 
 
-	// disponibilite_dates sur les immeubles, objets_services
-	if (!$e['edition'] and in_array($e['type'], array('immeuble', 'objets_service'))) {
+	// Objets_informations sur les objets choisis.
+	if (!$e['edition'] and in_array($e['table_objet_sql'], $objets_cibles)) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'disponibilite_dates',
 			'objet' => $e['type'],
 			'id_objet' => $flux['args'][$e['id_table_objet']]
 		));
+
 	}
 
 	if ($texte) {
@@ -53,10 +54,9 @@ function objets_disponibilites_affiche_milieu($flux) {
 		}
 	}
 
+
 	return $flux;
 }
-
-
 
 
 /**
