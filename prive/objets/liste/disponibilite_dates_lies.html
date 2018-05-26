@@ -17,7 +17,7 @@ a mis a jour la valeur avec la page reelle]
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{disponibilite_date:info_1_disponibilite_date,disponibilite_date:info_nb_disponibilite_dates}})</strong></caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(DISPONIBILITE_DATES){tout}{id_disponibilite_date IN #GET{selection}}{where?}
+		<BOUCLE_lettre(DISPONIBILITE_DATES){tout}{id_disponibilite_date IN #GET{selection}}{id_disponibilite_date_source=0}{where?}
 			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_disponibilite_date==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#TITRE**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
@@ -37,7 +37,7 @@ a mis a jour la valeur avec la page reelle]
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_disponibilite_dates(DISPONIBILITE_DATES){id_disponibilite_date IN #GET{selection}}
+	<BOUCLE_liste_disponibilite_dates(DISPONIBILITE_DATES){id_disponibilite_date IN #GET{selection}}{id_disponibilite_date_source=0}
 		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} disl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_DISPONIBILITE_DATE|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class="titre">[(#LOGO_DISPONIBILITE_DATE|image_reduire{20,20})]<a href="[(#ID_DISPONIBILITE_DATE|generer_url_entite{disponibilite_date})]">#TITRE</a></td>

@@ -45,9 +45,10 @@ function objets_disponibilites_declarer_tables_objets_sql($tables) {
 	$tables['spip_disponibilite_dates'] = array(
 		'type' => 'disponibilite_date',
 		'principale' => 'oui',
-		'table_objet_surnoms' => array('disponibilitedate'), // table_objet('disponibilite_date') => 'disponibilite_dates' 
+		'table_objet_surnoms' => array('disponibilitedate'), // table_objet('disponibilite_date') => 'disponibilite_dates'
 		'field'=> array(
 			'id_disponibilite_date' => 'bigint(21) NOT NULL',
+			'id_disponibilite_date_source' => 'bigint(21) NOT NULL',
 			'titre'              => 'varchar(255) NOT NULL DEFAULT ""',
 			'disponible'         => 'int(1) NOT NULL DEFAULT 1',
 			'date_debut'         => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',
