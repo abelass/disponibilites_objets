@@ -53,3 +53,7 @@ function dates_intervalle($date_debut, $date_fin, $debut = 0, $fin =0, $horaire=
 
 	return $dates;
 }
+
+function date_relative_brut($date, $decalage, $format = 'Y-m-d') {
+	return date($format, strtotime($decalage, strtotime($date)) );
+}
