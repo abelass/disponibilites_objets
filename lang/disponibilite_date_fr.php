@@ -15,7 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_date_debut_label' => 'Date début',
 	'champ_date_fin_label' => 'Date fin',
 	'champ_disponible_label' => 'Disponible',
-	'champ_titre_label' => 'Titre',
 	'confirmer_supprimer_disponibilite_date' => 'Confirmez-vous la suppression de cette date disponible ?',
 
 	// I
