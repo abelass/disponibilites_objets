@@ -17,7 +17,7 @@ a mis a jour la valeur avec la page reelle]
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{disponibilite_date:info_1_disponibilite_date,disponibilite_date:info_nb_disponibilite_dates}})</strong></caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(DISPONIBILITE_DATES){tout}{id_disponibilite_date IN #GET{selection}}{id_disponibilite_date_source=0}{where?}
+		<BOUCLE_lettre(DISPONIBILITE_DATES disponibilites_dates_liens){tout}{id_disponibilite_date IN #GET{selection}}{id_disponibilite_date_source=0}{where?}
 			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_disponibilite_date==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#TITRE**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
@@ -32,7 +32,7 @@ a mis a jour la valeur avec la page reelle]
 		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
 
 		<tr class="first_row">
-			<th class="titre" scope="col">[(#TRI{multi titre,<:disponibilite_date:champ_titre_label:>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{multi titre,<:ecrire:info_titre:>,ajax})]</th>
 			<th class="action" scope="col"></th>
 		</tr>
 	</thead>

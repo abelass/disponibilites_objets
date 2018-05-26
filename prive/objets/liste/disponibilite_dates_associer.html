@@ -24,7 +24,7 @@ a mis a jour la valeur avec la page reelle]
 </caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(DISPONIBILITE_DATES){tout}{!id_disponibilite_date IN #GET{exclus}}{id_disponibilite_date_source=0}{where?}{recherche?}
+		<BOUCLE_lettre(DISPONIBILITE_DATES disponibilites_dates_liens){tout}{!id_disponibilite_date IN #GET{exclus}}{id_disponibilite_date_source=0}{where?}{recherche?}
 			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_disponibilite_date==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#TITRE**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
