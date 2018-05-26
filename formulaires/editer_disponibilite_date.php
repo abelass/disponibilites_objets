@@ -69,6 +69,12 @@ function formulaires_editer_disponibilite_date_identifier_dist($id_disponibilite
  */
 function formulaires_editer_disponibilite_date_charger_dist($id_disponibilite_date = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('disponibilite_date', $id_disponibilite_date, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+
+	// Disponible par défaut
+	if ($id_espace == 'oui') {
+		$valeurs['disponible'] = 1;
+	}
+
 	return $valeurs;
 }
 
@@ -154,9 +160,9 @@ function formulaires_editer_disponibilite_date_traiter_dist($id_disponibilite_da
 
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
-			
+
 			objet_associer(array('disponibilite_date' => $id_disponibilite_date), array($objet => $id_objet));
-			
+
 			if (isset($retours['redirect'])) {
 				$retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_disponibilite_date, '&');
 			}
