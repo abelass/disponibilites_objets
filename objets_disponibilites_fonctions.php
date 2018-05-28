@@ -15,8 +15,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // Les fonctions de dates_outils.
 include_spip('filtres/dates_outils');
+include_spip('filtres/inc_agenda_filtres');
+
 
 // Les critères de dates_outils.
 include_spip('criteres/inc_agenda_filtres');
 include_spip('criteres/public_agenda');
-
