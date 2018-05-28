@@ -53,6 +53,7 @@ function objets_disponibilites_declarer_tables_objets_sql($tables) {
 			'disponible'         => 'int(1) NOT NULL DEFAULT 1',
 			'date_debut'         => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',
 			'date_fin'           => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',
+			'horaire'            => 'varchar(3) NOT NULL DEFAULT ""',
 			'date'               => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',
 			'maj'                => 'TIMESTAMP'
 		),
