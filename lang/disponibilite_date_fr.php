@@ -12,8 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_disponibilite_date' => 'Ajouter cette date disponible',
 
 	// C
-	'champ_date_debut_label' => 'Date début',
-	'champ_date_fin_label' => 'Date fin',
 	'champ_disponible_label' => 'Disponible',
 	'confirmer_supprimer_disponibilite_date' => 'Confirmez-vous la suppression de cette date disponible ?',
 
