@@ -1,48 +1,50 @@
+#SET{valeur,''}
+[(#ENV*{valeur}|oui)
+	#SET{valeur,#ENV{valeur}}
+]
+
 [(#ENV{multiple}|oui)
 	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
 ]
 #SET{date_actuelle,#ENV{date}}
-#SET{dates,#ARRAY}
 
 #SET{_date_actuelle,#GET{date_actuelle}}
-
+#SET{date_defaut,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{_date_actuelle}}}}}
 [(#ENV{horaire}|non)
-	#SET{_date_actuelle,#GET{date_actuelle}|affdate{Y-m-d}}
+	#SET{date_defaut,#GET{date_defaut}|affdate{Y-m-d}}
+	[(#GET{valeur}|oui)
+		#SET{valeur,#GET{valeur}|affdate{Y-m-d}}
+	]
 ]
 
 [(#ENV{multiple}|oui)
 	#SET{_date_actuelle,#ARRAY{#GET{date_actuelle}}
 ]
-#SET{date_limite,#ENV{date_limite,#GET{date_actuelle}|date_relative_brut{+1 month}}}
-#GET{date_limite}
-#SET{date_defaut, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{_date_actuelle}}}}
 
-<BOUCLE_disponibilite_dates(DISPONIBILITE_DATES disponibilite_dates_liens)
-		{date_fin > #GET{date_actuelle}}
-		{id_disponibilite_date?}
-		{objet?}
-		{id_objet?}
-		{disponible = 1}
-		{recherche?}
-		{tout}
-		{par num titre, titre}>
-			[(#DATE_DEBUT|!={#DATE_FIN}|?{
-				#SET{nombre_dates,#GET{date_actuelle}|dates_intervalle{#DATE_FIN,#ENV{debut,0},#ENV{fin,0},#ENV{horaire}}}
-				#SET{dates,#GET{dates}|array_merge{#GET{nombre_dates}}}
-				,
-				[(#DATE_DEBUT|>={#GET{date_actuelle}}|oui)
-					[(#ENV{horaire}|?{
-						#SET{dates,#GET{dates}|push{#DATE_DEBUT}},
-						#SET{dates,#GET{dates}|push{#DATE_DEBUT|affdate{Y-m-d}}}
-					})]
-				]
-			})]
-</BOUCLE_disponibilite_dates>
+#SET{date_debut,#ENV{date_debut,#GET{date_actuelle}}}
+#SET{date_limite,#ENV{date_limite,#GET{date_actuelle}|date_relative_brut{+1 year}}}
+
+#SET{dates_disponibles,#INCLURE{fond=inclure/dates_disponibles_tableau,
+	env,
+	disponible='',
+	date_debut=#GET{date_debut},
+	date_limite=#GET{date_limite}}|unserialize}
+
+#SET{dates_disponibles,#INCLURE{fond=inclure/dates_disponibles_tableau,
+	env,
+	disponible=1,
+	date_debut=#GET{date_debut},
+	date_limite=#GET{date_limite}}|unserialize}
+
+
+[(#GET{valeur}|oui)
+	#SET{dates_disponibles,#GET{dates_disponibles}|push{#GET{valeur}}
+]
 
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 	<option value="">[(#ENV{option_intro})]</option>]
-	<BOUCLE_dates(DATA) {source tableau, #GET{dates}|array_unique} {par valeur} >
+	<BOUCLE_dates(DATA) {source tableau, #GET{dates_disponibles}|array_unique} {par valeur} >
 		#SET{date,#VALEUR}
 		[(#ENV{multiple}|oui)
 		<option value="#GET{date}"[(#GET{date}|in_array{#GET{date_defaut}}|oui) selected="selected"]>
