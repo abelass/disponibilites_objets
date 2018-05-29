@@ -11,9 +11,9 @@
 #SET{_date_actuelle,#GET{date_actuelle}}
 #SET{date_defaut,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{_date_actuelle}}}}}
 [(#ENV{horaire}|non)
-	#SET{date_defaut,#GET{date_defaut}|affdate{Y-m-d}}
+	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,Y-m-d}}
 	[(#GET{valeur}|oui)
-		#SET{valeur,#GET{valeur}|affdate{Y-m-d}}
+		#SET{valeur,#GET{valeur}|formater_date{horaire_zero,Y-m-d}}
 	]
 ]
 
@@ -21,12 +21,12 @@
 	#SET{_date_actuelle,#ARRAY{#GET{date_actuelle}}
 ]
 
-#SET{date_debut,#ENV{date_debut,#GET{date_actuelle}}}
-#SET{date_limite,#ENV{date_limite_fin,#GET{date_actuelle}|date_relative_brut{+1 year}}}
+#SET{date_debut,#ENV{date_limite_debut,#GET{date_actuelle}}}
+#SET{date_limite,#ENV{date_limite_fin,#GET{date_actuelle}|date_relative_brut{+1 year, Y-m-d}}}
 
 
 #SET{contexte,#ARRAY{
-		date_debut,#GET{date_debut},
+		date_limite_debut,#GET{date_debut},
 		date_limite,#GET{date_limite},
 	}
 }
@@ -42,12 +42,16 @@
 	<option value="">[(#ENV{option_intro})]</option>]
 	<BOUCLE_dates(DATA) {source tableau, #GET{dates}|array_unique} {par valeur} >
 		#SET{date,#VALEUR}
+		[(#ENV{horaire}|non)
+			#SET{date,#VALEUR|formater_date{horaire_zero,Y-m-d}}
+
+		]
 		[(#ENV{multiple}|oui)
-		<option value="#GET{date}"[(#GET{date}|in_array{#GET{date_defaut}}|oui) selected="selected"]>
+		<option value="[(#GET{date}|htmlspecialchars)]"[(#GET{date}|in_array{#GET{date_defaut}}|oui) selected="selected"]>
 			[(#VALEUR|affdate_court)]
 		</option>]
 	[(#ENV{multiple}|non)
-		<option value="#GET{date}"[(#GET{date}|=={#GET{date_defaut}}|oui) selected="selected"]>
+		<option value="[(#GET{date}|htmlspecialchars)]"[(#GET{date}|=={#GET{date_defaut}}|oui) selected="selected"]>
 		[(#VALEUR|affdate_court)]
 		</option>]
 	</BOUCLE_dates>
