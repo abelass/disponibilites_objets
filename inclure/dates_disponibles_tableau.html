@@ -13,7 +13,7 @@
 		{id_disponibilite_date?}
 		{objet?}
 		{id_objet?}
-		{disponible?}
+		{disponible}
 		{recherche?}
 		{tout}
 		{par num titre, titre}>
@@ -21,7 +21,7 @@
 				#SET{nombre_dates,#ENV{date_debut}|dates_intervalle{#DATE_FIN,#ENV{debut,0},#ENV{fin,0},#ENV{horaire}}}
 				#SET{dates,#GET{dates}|array_merge{#GET{nombre_dates}}}
 				,
-				[(#DATE_DEBUT|>={#GET{date_debut}}|oui)
+				[(#DATE_DEBUT|>={#ENV{date_debut}}|oui)
 					[(#ENV{horaire}|?{
 						#SET{dates,#GET{dates}|push{#DATE_DEBUT}},
 						#SET{dates,#GET{dates}|push{#DATE_DEBUT|affdate{Y-m-d}}}

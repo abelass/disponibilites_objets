@@ -22,29 +22,25 @@
 ]
 
 #SET{date_debut,#ENV{date_debut,#GET{date_actuelle}}}
-#SET{date_limite,#ENV{date_limite,#GET{date_actuelle}|date_relative_brut{+1 year}}}
+#SET{date_limite,#ENV{date_limite_fin,#GET{date_actuelle}|date_relative_brut{+1 year}}}
 
-#SET{dates_disponibles,#INCLURE{fond=inclure/dates_disponibles_tableau,
-	env,
-	disponible='',
-	date_debut=#GET{date_debut},
-	date_limite=#GET{date_limite}}|unserialize}
 
-#SET{dates_disponibles,#INCLURE{fond=inclure/dates_disponibles_tableau,
-	env,
-	disponible=1,
-	date_debut=#GET{date_debut},
-	date_limite=#GET{date_limite}}|unserialize}
+#SET{contexte,#ARRAY{
+		date_debut,#GET{date_debut},
+		date_limite,#GET{date_limite},
+	}
+}
 
+#SET{dates, #GET{contexte}|dates_disponibles{#ENV**}}
 
 [(#GET{valeur}|oui)
-	#SET{dates_disponibles,#GET{dates_disponibles}|push{#GET{valeur}}
+	#SET{dates,#GET{dates}|push{#GET{valeur}}
 ]
 
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 	<option value="">[(#ENV{option_intro})]</option>]
-	<BOUCLE_dates(DATA) {source tableau, #GET{dates_disponibles}|array_unique} {par valeur} >
+	<BOUCLE_dates(DATA) {source tableau, #GET{dates}|array_unique} {par valeur} >
 		#SET{date,#VALEUR}
 		[(#ENV{multiple}|oui)
 		<option value="#GET{date}"[(#GET{date}|in_array{#GET{date_defaut}}|oui) selected="selected"]>
