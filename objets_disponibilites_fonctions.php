@@ -26,7 +26,6 @@ function dates_disponibles($options, $contexte) {
 
 	$contexte = array_merge(unserialize($contexte), $options);
 
-	$contexte['disponible'] = '';
 	$dates_indisponibles = unserialize(recuperer_fond('inclure/dates_indisponibles_tableau', $contexte));
 
 	$dates_disponibles = unserialize(recuperer_fond('inclure/dates_disponibles_tableau', $contexte));
