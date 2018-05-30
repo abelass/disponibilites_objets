@@ -11,9 +11,9 @@
 #SET{_date_actuelle,#GET{date_actuelle}}
 #SET{date_defaut,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{_date_actuelle}}}}}
 [(#ENV{horaire}|non)
-	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,Y-m-d}}
+	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,Y-m-d H:i:s}}
 	[(#GET{valeur}|oui)
-		#SET{valeur,#GET{valeur}|formater_date{horaire_zero,Y-m-d}}
+		#SET{valeur,#GET{valeur}|formater_date{horaire_zero,Y-m-d H:i:s}}
 	]
 ]
 
@@ -43,7 +43,7 @@
 	<BOUCLE_dates(DATA) {source tableau, #GET{dates}|array_unique} {par valeur} >
 		#SET{date,#VALEUR}
 		[(#ENV{horaire}|non)
-			#SET{date,#VALEUR|formater_date{horaire_zero,Y-m-d}}
+			#SET{date,#VALEUR|formater_date{horaire_zero,Y-m-d H:i:s}}
 
 		]
 		[(#ENV{multiple}|oui)
