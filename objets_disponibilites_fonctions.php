@@ -36,7 +36,6 @@ function dates_disponibles($options, $contexte) {
 	/*
 	 * Les indisponibles
 	 */
-
 	// Les dates considérés comme utilisées
 	$dates_utilisees = array();
 	if (isset($contexte['utilisation_squelette']) and $chemin = $contexte['utilisation_squelette'] and find_in_path($chemin . '.html')) {
