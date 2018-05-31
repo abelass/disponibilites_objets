@@ -3,12 +3,12 @@
 	{agendafull date_debut,
 		date_fin,
 		periode,
-		#ENV{date_debut}|affdate{Y},
-		#ENV{date_debut}|affdate{m},
-		#ENV{date_debut}|affdate{d},
-		#ENV{date_limite}|affdate{Y},
-		#ENV{date_limite}|affdate{m},
-		#ENV{date_limite}|affdate{d}
+		#ENV{date_limite_debut}|affdate{Y},
+		#ENV{date_limite_debut}|affdate{m},
+		#ENV{date_limite_debut}|affdate{d},
+		#ENV{date_limite_fin}|affdate{Y},
+		#ENV{date_limite_fin}|affdate{m},
+		#ENV{date_limite_fin}|affdate{d}
 	}
 		{id_disponibilite_date?}
 		{objet?}
@@ -24,7 +24,7 @@
 				[(#DATE_DEBUT|>={#ENV{date_limite_debut}}|oui)
 					[(#ENV{horaire}|?{
 						#SET{dates,#GET{dates}|push{#DATE_DEBUT}},
-						#SET{dates,#GET{dates}|push{#DATE_DEBUT|affdate{Y-m-d}}}
+						#SET{dates,#GET{dates}|push{#DATE_DEBUT|formater_date{horaire_zero,Y-m-d H:i:s}}}
 					})]
 				]
 			})]

@@ -1,3 +1,26 @@
+[(#REM)
+
+	Action :
+		- Les dates disponibles pour un objet données.
+
+	Parametres :
+		- date_limite_debut : a partir de quand les dates sont affichées.
+		- date_limite_fin : limite de dates à afficher
+		- utilisation_squelette : le squelette qui calcule les dates disponibles
+
+
+	Exemple d'appel :
+	[(#SAISIE{dates_disponibles, date_fin,
+		label=<:dates_outils:champ_date_fin_label:>,
+		objet=[(#ENV{location_objet}|objet_type)],
+		id_objet=#ENV{id_location_objet},
+		decalage_debut=#ENV{decalage_debut},
+		decalage_fin=#ENV{decalage_fin,1},
+		date_limite_debut=#ENV{date_limite_debut},
+		defaut=#ENV{date_debut},
+		utilisation_squelette=disponibilites/utilisees_objet_location.html
+	})]
+]
 #SET{valeur,''}
 [(#ENV*{valeur}|oui)
 	#SET{valeur,#ENV{valeur}}
@@ -6,10 +29,11 @@
 [(#ENV{multiple}|oui)
 	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
 ]
+
 #SET{date_actuelle,#ENV{date}}
 
-#SET{_date_actuelle,#GET{date_actuelle}}
-#SET{date_defaut,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{_date_actuelle}}}}}
+
+#SET{date_defaut,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{date_actuelle}}}}}
 [(#ENV{horaire}|non)
 	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,Y-m-d H:i:s}}
 	[(#GET{valeur}|oui)
@@ -18,16 +42,15 @@
 ]
 
 [(#ENV{multiple}|oui)
-	#SET{_date_actuelle,#ARRAY{#GET{date_actuelle}}
+	#SET{date_actuelle,#ARRAY{#GET{date_actuelle}}
 ]
 
-#SET{date_debut,#ENV{date_limite_debut,#GET{date_actuelle}}}
-#SET{date_limite,#ENV{date_limite_fin,#GET{date_actuelle}|date_relative_brut{+1 year, Y-m-d}}}
-
+#SET{date_limite_debut,#ENV{date_limite_debut,#GET{date_actuelle}}}
+#SET{date_limite_fin,#ENV{date_limite_fin,#GET{date_actuelle}|date_relative_brut{+1 year, Y-m-d}}}
 
 #SET{contexte,#ARRAY{
-		date_limite_debut,#GET{date_debut},
-		date_limite,#GET{date_limite},
+		date_limite_debut,#GET{date_limite_debut},
+		date_limite_fin,#GET{date_limite_fin},
 	}
 }
 
