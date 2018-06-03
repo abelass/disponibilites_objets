@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
-	function formulaires_configurer_objets_disponibilites_saisies_dist() {
+function formulaires_configurer_objets_disponibilites_saisies_dist() {
 	include_spip('inc/config');
 
 	$config = lire_config('objets_disponibilites', array());
