@@ -32,14 +32,17 @@ include_spip('criteres/public_agenda');
  */
 function dates_disponibles($options, $contexte) {
 	$contexte = array_merge(unserialize($contexte), $options);
-
 	/*
 	 * Les indisponibles
 	 */
 	// Les dates considérés comme utilisées
-	$dates_utilisees = array();
-	if (isset($contexte['utilisation_squelette']) and $chemin = $contexte['utilisation_squelette'] and find_in_path($chemin . '.html')) {
+	if (isset($contexte['utilisation_squelette']) and
+		$chemin = $contexte['utilisation_squelette'] and
+		find_in_path($chemin . '.html')) {
 		$dates_utilisees = unserialize(recuperer_fond($chemin, $contexte));
+	}
+	else {
+		$dates_utilisees = array();
 	}
 
 	// Les dates de l'objet encodés comme indisponibles
