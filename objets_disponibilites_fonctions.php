@@ -30,8 +30,13 @@ include_spip('criteres/public_agenda');
  * @return array
  *          Les dates disponibles.
  */
-function dates_disponibles($options, $contexte) {
-	$contexte = array_merge(unserialize($contexte), $options);
+function dates_disponibles($options, $contexte = array()) {
+
+
+	if (!is_array($contexte)) {
+		$contexte = unserialize($contexte);
+	}
+	$contexte = array_merge($contexte, $options);
 	/*
 	 * Les indisponibles
 	 */
