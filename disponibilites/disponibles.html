@@ -18,13 +18,13 @@
 		{tout}
 		{par num titre, titre}>
 			[(#DATE_DEBUT|!={#DATE_FIN}|?{
-				#SET{nombre_dates,#ENV{date_limite_debut}|dates_intervalle{#DATE_FIN,#ENV{debut,0},#ENV{fin,0},#ENV{horaire}}}
+				#SET{nombre_dates,#ENV{date_limite_debut}|dates_intervalle{#DATE_FIN,#ENV{debut,0},#ENV{fin,0},#ENV{horaire},#ENV{format}}}
 				#SET{dates,#GET{dates}|array_merge{#GET{nombre_dates}}}
 				,
 				[(#DATE_DEBUT|>={#ENV{date_limite_debut}}|oui)
 					[(#ENV{horaire}|?{
 						#SET{dates,#GET{dates}|push{#DATE_DEBUT}},
-						#SET{dates,#GET{dates}|push{#DATE_DEBUT|formater_date{horaire_zero,Y-m-d H:i:s}}}
+						#SET{dates,#GET{dates}|push{#DATE_DEBUT|formater_date{horaire_zero,#ENV{format,Y-m-d H:i:s}}}}
 					})]
 				]
 			})]
