@@ -15,22 +15,22 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 		$horaire = isset($options['horaire']) ? $options['horaire'] : FALSE;
 		$format = isset($options['format']) ? $options['format'] : ($horaire ? 'd-m-Y H:i:s' : 'd-m-Y');
 		$utilisation_squelette = isset($options['utilisation_squelette']) ? $options['utilisation_squelette'] : FALSE;
-		$utilisation_id_exclue = isset($options['utilisation_id_exclue']) ? $options['utilisation_id_exclue'] : FALSE;
+		$utilisation_id_exclu = isset($options['utilisation_id_exclu']) ? $options['utilisation_id_exclu'] : FALSE;
 
 		$intervalle = dates_intervalle($date_debut, $date_fin, 1, -1, $horaire, $format) ;
 
 		$disponible = dates_disponibles(
 			array(
-				'objet' => $objet ,
-				'id_objet' => _request('id_location_objet'),
-				'debut' => 0,
-				'fin' => 0,
-				'date_limite_debut' => $date_debut,
-				'date_limite_fin' => $date_fin,
-				'utilisation_squelette' => $utilisation_squelette,
-				'utilisation_id_exclu' => $utilisation_id_exclue,
-				'format' => $format,
-			)
+					'objet' => $objet ,
+					'id_objet' => $id_objet,
+					'debut' => 0,
+					'fin' => 0,
+					'date_limite_debut' => $date_debut,
+					'date_limite_fin' => $date_fin,
+					'utilisation_squelette' => $utilisation_squelette,
+					'utilisation_id_exclu' => $utilisation_id_exclu,
+					'format' => $format,
+				)
 			);
 
 		$difference = array_diff($intervalle, $disponible);
