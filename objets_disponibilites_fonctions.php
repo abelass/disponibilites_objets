@@ -32,7 +32,6 @@ include_spip('criteres/public_agenda');
  */
 function dates_disponibles($options, $contexte = array()) {
 
-
 	if (!is_array($contexte)) {
 		$contexte = unserialize($contexte);
 	}
@@ -61,7 +60,5 @@ function dates_disponibles($options, $contexte = array()) {
 	/*
 	 * Le décompte, les disponibles moins les indisponibles
 	 */
-	$dates = array_diff($dates_disponibles, $dates_indisponibles, $dates_utilisees);
-
-	return $dates;
+	return array_diff($dates_disponibles, $dates_indisponibles, $dates_utilisees);
 }
