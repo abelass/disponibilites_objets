@@ -71,7 +71,7 @@ function formulaires_editer_disponibilite_date_charger_dist($id_disponibilite_da
 	$valeurs = formulaires_editer_objet_charger('disponibilite_date', $id_disponibilite_date, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
 	// Disponible par défaut
-	if ($id_espace == 'oui') {
+	if ($id_disponibilite_date == 'oui') {
 		$valeurs['disponible'] = 1;
 	}
 
