@@ -12,7 +12,8 @@
 		<tr class="first_row">
 			<th class="picto" scope="col"></th>
 			<th class="titre" scope="col">[(#TRI{titre,<:ecrire:info_titre:>,ajax})]</th>
-			<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class="dates" scope="col"><:dates_outils:champ_date_debut_label:> - <:dates_outils:champ_date_fin_label:></th>
+			<th class="disponible" scope="col"><:disponibilite_date:champ_disponible_label:></th>
 			<th class="id" scope="col">[(#TRI{id_disponibilite_date,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -20,8 +21,15 @@
 	<BOUCLE_liste_disponibilite_dates(DISPONIBILITE_DATES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{disponibilite_date-16.png}|balise_img)]</td>
-			<td class="titre principale">[(#LOGO_DISPONIBILITE_DATE|image_reduire{20,26})]<a href="[(#ID_DISPONIBILITE_DATE|generer_url_entite{disponibilite_date})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DISPONIBILITE_DATE">[(#RANG). ]#TITRE</a></td>
-			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td> 
+			<td class="titre principale">[(#LOGO_DISPONIBILITE_DATE|image_reduire{20,26})]
+				<a
+					href="[(#ID_DISPONIBILITE_DATE|generer_url_entite{disponibilite_date})]"
+					title="<:info_numero_abbreviation|attribut_html:> #ID_DISPONIBILITE_DATE">
+					[(#RANG). ]#TITRE
+				</a>
+			</td>
+			<td class="dates">[(#DATE_DEBUT|dates_affdate_debut_fin{#DATE_FIN,#HORAIRE})]</td>
+			<td class="disponible">[(#DISPONIBLE|?{<:ecrire:item_oui:>,<:ecrire:item_non:>})]</td>
 			<td class="id">[(#AUTORISER{modifier,disponibilite_date,#ID_DISPONIBILITE_DATE}|?{
 				<a href="[(#URL_ECRIRE{disponibilite_date_edit,id_disponibilite_date=#ID_DISPONIBILITE_DATE})]">#ID_DISPONIBILITE_DATE</a>,
 				#ID_DISPONIBILITE_DATE
