@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_tous_liens_disponibilite_dates' => 'Retirer toutes les périodes de dates disponibles',
 
 	// S
-	'supprimer_disponibilite_date' => 'Supprimer cette pérdiode dates disponibles',
+	'supprimer_disponibilite_date' => 'Supprimer cette période de dates disponibles',
 
 	// T
 	'texte_ajouter_disponibilite_date' => 'Ajouter une période de dates disponibles',
