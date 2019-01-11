@@ -9,36 +9,32 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_lien_disponibilite_date' => 'Ajouter cette date disponible',
+	'ajouter_lien_disponibilite_date' => 'Ajouter cette période de dates disponibles',
 
 	// C
 	'champ_disponible_label' => 'Disponible',
-	'confirmer_supprimer_disponibilite_date' => 'Confirmez-vous la suppression de cette date disponible ?',
+	'confirmer_supprimer_disponibilite_date' => 'Confirmez-vous la suppression de cette période de dates disponibles ?',
 
 	// I
-	'icone_creer_disponibilite_date' => 'Créer une date disponible',
-	'icone_modifier_disponibilite_date' => 'Modifier cette date disponible',
-	'info_1_disponibilite_date' => 'Une date disponible',
-	'info_aucun_disponibilite_date' => 'Aucune date disponible',
-	'info_disponibilite_dates_auteur' => 'Les dates disponibles de cet auteur',
-	'info_nb_disponibilite_dates' => '@nb@ dates disponibles',
+	'icone_creer_disponibilite_date' => 'Créer une période de dates disponibles',
+	'icone_modifier_disponibilite_date' => 'Modifier cette période de dates disponibles',
+	'info_1_disponibilite_date' => 'Une période de dates disponibles',
+	'info_aucun_disponibilite_date' => 'Aucune période de dates disponibles',
+	'info_nb_disponibilite_dates' => '@nb@ périodes de dates disponibles',
 
 	// R
-	'retirer_lien_disponibilite_date' => 'Retirer cette date disponible',
-	'retirer_tous_liens_disponibilite_dates' => 'Retirer toutes les dates disponibles',
+	'retirer_lien_disponibilite_date' => 'Retirer cette période de dates disponibles',
+	'retirer_tous_liens_disponibilite_dates' => 'Retirer toutes les périodes de dates disponibles',
 
 	// S
-	'supprimer_disponibilite_date' => 'Supprimer cette date disponible',
+	'supprimer_disponibilite_date' => 'Supprimer cette pérdiode dates disponibles',
 
 	// T
-	'texte_ajouter_disponibilite_date' => 'Ajouter une date disponible',
-	'texte_changer_statut_disponibilite_date' => 'Cette date disponible est :',
-	'texte_creer_associer_disponibilite_date' => 'Créer et associer une date disponible',
-	'texte_definir_comme_traduction_disponibilite_date' => 'Cette date disponible est une traduction de la date disponible numéro :',
-	'titre_disponibilite_date' => 'Date disponible',
-	'titre_disponibilite_dates' => 'Dates disponibles',
-	'titre_disponibilite_dates_rubrique' => 'Dates disponibles de la rubrique',
-	'titre_langue_disponibilite_date' => 'Langue de cette date disponible',
-	'titre_logo_disponibilite_date' => 'Logo de cette date disponible',
-	'titre_objets_lies_disponibilite_date' => 'Liés à cette date disponible',
+	'texte_ajouter_disponibilite_date' => 'Ajouter une période de dates disponibles',
+	'texte_changer_statut_disponibilite_date' => 'Cette période de dates disponibles est :',
+	'texte_creer_associer_disponibilite_date' => 'Créer et associer une période de dates disponibles',
+	'titre_disponibilite_date' => 'Période de dates disponibles',
+	'titre_disponibilite_dates' => 'Périodes de dates disponibles',
+	'titre_logo_disponibilite_date' => 'Logo de cette période de dates disponibles',
+	'titre_objets_lies_disponibilite_date' => 'Liés à cettepériode de dates disponibles',
 );
