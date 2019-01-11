@@ -36,5 +36,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_disponibilite_date' => 'Période de dates disponibles',
 	'titre_disponibilite_dates' => 'Périodes de dates disponibles',
 	'titre_logo_disponibilite_date' => 'Logo de cette période de dates disponibles',
-	'titre_objets_lies_disponibilite_date' => 'Liés à cettepériode de dates disponibles',
+	'titre_objets_lies_disponibilite_date' => 'Liés à cette période de dates disponibles',
 );
