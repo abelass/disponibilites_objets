@@ -74,11 +74,11 @@
 		]
 		[(#ENV{multiple}|oui)
 		<option value="[(#GET{date}|htmlspecialchars)]"[(#GET{date}|in_array{#GET{date_defaut}}|oui) selected="selected"]>
-			[(#VALEUR|affdate_court)]
+			[(#VALEUR|affdate{d-m-Y})]
 		</option>]
 	[(#ENV{multiple}|non)
 		<option value="[(#GET{date}|htmlspecialchars)]"[(#GET{date}|=={#GET{date_defaut}}|oui) selected="selected"]>
-		[(#VALEUR|affdate_court)]
+		[(#VALEUR|affdate{d-m-Y})]
 		</option>]
 	</BOUCLE_dates>
 </select>
