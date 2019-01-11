@@ -3,7 +3,7 @@
  * Utilisations de pipelines par Disponibilites objets
  *
  * @plugin     Disponibilites objets
- * @copyright  2018
+ * @copyright  2018 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Objets_disponibilites\Pipelines

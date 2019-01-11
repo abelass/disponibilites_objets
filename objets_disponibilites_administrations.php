@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Disponibilites objets
  *
  * @plugin     Disponibilites objets
- * @copyright  2018
+ * @copyright  2018 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Objets_disponibilites\Installation
