@@ -71,7 +71,7 @@
 
 <script type="text/javascript">
 	var datesDisponibles = [(#GET{dates}|json_encode)];
-console.log(datesDisponibles);
+
 	function disponible(date) {
 		var jour = date.getDate();
 		if (jour < 10) {
@@ -87,9 +87,9 @@ console.log(datesDisponibles);
 		//if ($.inArray(dmy, datesDisponibles) !== -1) {
 		if (Object.values(datesDisponibles).indexOf(dmy) !== -1) {
 			return [true, "","Available"];
-			console.log(dmy, 'true');
+
 		} else {
-			console.log(dmy, 'false');
+
 			return [false,"","unAvailable"];
 		}
 	}
