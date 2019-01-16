@@ -12,9 +12,7 @@
 
 
 	Exemple d'appel :
-	[(#INCLURE{
-		incluredates_disponibles,
-		nom=date_fin,
+	[(#SAISIE{dates_disponibles, date_fin,
 		label=<:dates_outils:champ_date_fin_label:>,
 		objet=[(#ENV{location_objet}|objet_type)],
 		id_objet=#ENV{id_location_objet},
@@ -56,7 +54,6 @@
 #SET{contexte,#ARRAY{
 		date_limite_debut,#GET{date_limite_debut},
 		date_limite_fin,#GET{date_limite_fin},
-		format,d-m-Y,
 	}
 }
 
@@ -66,38 +63,22 @@
 	#SET{dates,#GET{dates}|push{#GET{valeur}}
 ]
 
-[(#INCLURE{fond=saisies/input,env})]
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+	<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_dates(DATA) {source tableau, #GET{dates}|array_unique} {par valeur} >
+		#SET{date,#VALEUR}
+		[(#ENV{horaire}|non)
+			#SET{date,#VALEUR|formater_date{horaire_zero,Y-m-d H:i:s}}
 
-
-<script type="text/javascript">
-	var datesDisponibles = [(#GET{dates}|json_encode)];
-console.log(datesDisponibles);
-	function disponible(date) {
-		var jour = date.getDate();
-		if (jour < 10) {
-			jour = '0' + jour;
-		}
-		var mois = date.getMonth() + 1;
-		if (mois < 10) {
-			mois = '0' + mois;
-		}
-
-		dmy = jour  + "-" + mois + "-" + date.getFullYear();
-
-		//if ($.inArray(dmy, datesDisponibles) !== -1) {
-		if (Object.values(datesDisponibles).indexOf(dmy) !== -1) {
-			return [true, "","Available"];
-			console.log(dmy, 'true');
-		} else {
-			console.log(dmy, 'false');
-			return [false,"","unAvailable"];
-		}
-	}
-	jQuery(document).ready(function() {
-		$('#champ_#ENV{nom}').datepicker({
-			dateFormat: 'dd-mm-yy',
-			beforeShowDay: disponible
-			});
-	});
-
-</script>
+		]
+		[(#ENV{multiple}|oui)
+		<option value="[(#GET{date}|htmlspecialchars)]"[(#GET{date}|in_array{#GET{date_defaut}}|oui) selected="selected"]>
+			[(#VALEUR|affdate{d-m-Y})]
+		</option>]
+	[(#ENV{multiple}|non)
+		<option value="[(#GET{date}|htmlspecialchars)]"[(#GET{date}|=={#GET{date_defaut}}|oui) selected="selected"]>
+		[(#VALEUR|affdate{d-m-Y})]
+		</option>]
+	</BOUCLE_dates>
+</select>
