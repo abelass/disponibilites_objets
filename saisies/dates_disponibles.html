@@ -95,7 +95,8 @@
 	}
 	jQuery(document).ready(function() {
 		$('#champ_#ENV{nom}').datepicker({
-			dateFormat: 'dd-mm-yy',
+			defaultDate: [(#ENV{valeur,#ENV{date_limite_debut,#DATE}}|affdate{d/m/Y})],
+			dateFormat: 'dd/mm/yy',
 			beforeShowDay: disponible
 			});
 	});
