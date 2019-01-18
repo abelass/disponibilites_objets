@@ -84,7 +84,6 @@
 
 		dmy = jour  + "-" + mois + "-" + date.getFullYear();
 
-		//if ($.inArray(dmy, datesDisponibles) !== -1) {
 		if (Object.values(datesDisponibles).indexOf(dmy) !== -1) {
 			return [true, "","Available"];
 
@@ -93,8 +92,7 @@
 			return [false,"","unAvailable"];
 		}
 	}
-
-	$.(document).ready(function() {
+	$(document).ready(function() {
 		$('#champ_#ENV{nom}').datepicker({
 			buttonText: '<:afficher_calendrier|texte_script:>',
 			buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
@@ -131,3 +129,11 @@
 			});
 	});
 </script>
+<style type="text/css">
+[(#INCLURE{formulaires/dateur/time_picker.css}|compacte{css})]
+img.ui-datepicker-trigger { display: inline-block; padding: 0; margin: 0; margin-[(#ENV{lang}|lang_dir|choixsiegal{ltr,left,right})]: -19px; vertical-align: middle; z-index:2 }
+div.time-picker {font-size:11px;  width:5em; /* needed for IE */}
+.formulaire_spip input.date {width:9em;padding-[(#ENV{lang}|lang_dir|choixsiegal{ltr,right,left})]:25px;}
+.formulaire_spip input.heure {width:7em;}
+</style>
+
