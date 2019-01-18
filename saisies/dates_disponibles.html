@@ -40,9 +40,9 @@
 
 #SET{date_defaut,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{date_actuelle}}}}}
 [(#ENV{horaire}|non)
-	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,Y/m/d H:i:s}}
+	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,d/m/Y H:i:s}}
 	[(#GET{valeur}|oui)
-		#SET{valeur,#GET{valeur}|formater_date{horaire_zero,Y/m/d H:i:s}}
+		#SET{valeur,#GET{valeur}|formater_date{horaire_zero,d/m/Y}}
 	]
 ]
 
@@ -51,7 +51,7 @@
 ]
 
 #SET{date_limite_debut,#ENV{date_limite_debut,#GET{date_actuelle}}}
-#SET{date_limite_fin,#ENV{date_limite_fin,#GET{date_actuelle}|date_relative_brut{+1 year, Y-m-d}}}
+#SET{date_limite_fin,#ENV{date_limite_fin,#GET{date_actuelle}|date_relative_brut{+1 year, d-m-Y}}}
 
 #SET{contexte,#ARRAY{
 		date_limite_debut,#GET{date_limite_debut},
@@ -66,9 +66,8 @@
 	#SET{dates,#GET{dates}|push{#GET{valeur}}
 ]
 
-#SET{dates,#GET{dates}|dd_sort_dates}
+#SET{dates,#GET{dates}|do_trie_dates}
 #SET{date_min,#DATE|affdate{d/m/Y}}
-
 <BOUCLE_min(DATA){source tableau, #GET{dates}}{0,1}>
 	#SET{date_min,(#VALEUR|replace{'-','/'})}
 </BOUCLE_min>
@@ -79,6 +78,7 @@
 	min=#GET{date_min},
 	class=[(#ENV{class}) ]date,
 	placeholder=dd/mm/yyyy,
+	valeur=#GET{valeur},
 	env})]
 
 
@@ -131,6 +131,7 @@ console.log(datesDisponibles);
 			dayNamesMin: [
 				'<:date_jour_1_initiale|texte_script:>','<:date_jour_2_initiale|texte_script:>','<:date_jour_3_initiale|texte_script:>','<:date_jour_4_initiale|texte_script:>',
 				'<:date_jour_5_initiale|texte_script:>','<:date_jour_6_initiale|texte_script:>','<:date_jour_7_initiale|texte_script:>'],
+			dateFormat: 'dd/mm/yy',
 			defaultDate: [(#ENV{valeur,#GET{date_min}})],
 			minDate: [(#ENV{valeur,#GET{date_min}})],
 			gotoCurrent: true,
