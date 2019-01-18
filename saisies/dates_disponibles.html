@@ -40,9 +40,9 @@
 
 #SET{date_defaut,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{date_actuelle}}}}}
 [(#ENV{horaire}|non)
-	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,Y-m-d H:i:s}}
+	#SET{date_defaut,#GET{date_defaut}|formater_date{horaire_zero,Y/m/d H:i:s}}
 	[(#GET{valeur}|oui)
-		#SET{valeur,#GET{valeur}|formater_date{horaire_zero,Y-m-d H:i:s}}
+		#SET{valeur,#GET{valeur}|formater_date{horaire_zero,Y/m/d H:i:s}}
 	]
 ]
 
@@ -66,12 +66,25 @@
 	#SET{dates,#GET{dates}|push{#GET{valeur}}
 ]
 
-[(#INCLURE{fond=saisies/input,autocomplete=off,env})]
+#SET{dates,#GET{dates}|dd_sort_dates}
+#SET{date_min,#DATE|affdate{d/m/Y}}
+
+<BOUCLE_min(DATA){source tableau, #GET{dates}}{0,1}>
+	#SET{date_min,(#VALEUR|replace{'-','/'})}
+</BOUCLE_min>
+
+[(#INCLURE{
+	fond=saisies/input,
+	autocomplete=off,
+	min=#GET{date_min},
+	class=[(#ENV{class}) ]date,
+	placeholder=dd/mm/yyyy,
+	env})]
 
 
 <script type="text/javascript">
 	var datesDisponibles = [(#GET{dates}|json_encode)];
-
+console.log(datesDisponibles);
 	function disponible(date) {
 		var jour = date.getDate();
 		if (jour < 10) {
@@ -84,7 +97,8 @@
 
 		dmy = jour  + "-" + mois + "-" + date.getFullYear();
 
-		if (Object.values(datesDisponibles).indexOf(dmy) !== -1) {
+		//if (Object.values(datesDisponibles).indexOf(dmy) !== -1) {
+		if	($.inArray(dmy, datesDisponibles) !== -1) {
 			return [true, "","Available"];
 
 		} else {
@@ -117,8 +131,9 @@
 			dayNamesMin: [
 				'<:date_jour_1_initiale|texte_script:>','<:date_jour_2_initiale|texte_script:>','<:date_jour_3_initiale|texte_script:>','<:date_jour_4_initiale|texte_script:>',
 				'<:date_jour_5_initiale|texte_script:>','<:date_jour_6_initiale|texte_script:>','<:date_jour_7_initiale|texte_script:>'],
-			defaultDate: [(#ENV{valeur,#ENV{date_limite_debut,#DATE}}|affdate{d/m/Y})],
-			dateFormat: 'dd/mm/yy',
+			defaultDate: [(#ENV{valeur,#GET{date_min}})],
+			minDate: [(#ENV{valeur,#GET{date_min}})],
+			gotoCurrent: true,
 			beforeShowDay: disponible,
 			changeMonth: true,
 			changeYear: true,
@@ -129,11 +144,4 @@
 			});
 	});
 </script>
-<style type="text/css">
-[(#INCLURE{formulaires/dateur/time_picker.css}|compacte{css})]
-img.ui-datepicker-trigger { display: inline-block; padding: 0; margin: 0; margin-[(#ENV{lang}|lang_dir|choixsiegal{ltr,left,right})]: -19px; vertical-align: middle; z-index:2 }
-div.time-picker {font-size:11px;  width:5em; /* needed for IE */}
-.formulaire_spip input.date {width:9em;padding-[(#ENV{lang}|lang_dir|choixsiegal{ltr,right,left})]:25px;}
-.formulaire_spip input.heure {width:7em;}
-</style>
 
