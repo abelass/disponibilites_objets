@@ -84,7 +84,6 @@
 
 <script type="text/javascript">
 	var datesDisponibles = [(#GET{dates}|json_encode)];
-console.log(datesDisponibles);
 	function disponible(date) {
 		var jour = date.getDate();
 		if (jour < 10) {
