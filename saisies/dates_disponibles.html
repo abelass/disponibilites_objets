@@ -96,7 +96,6 @@
 
 		dmy = jour  + "-" + mois + "-" + date.getFullYear();
 
-		//if (Object.values(datesDisponibles).indexOf(dmy) !== -1) {
 		if	($.inArray(dmy, datesDisponibles) !== -1) {
 			return [true, "","Available"];
 
@@ -131,8 +130,8 @@
 				'<:date_jour_1_initiale|texte_script:>','<:date_jour_2_initiale|texte_script:>','<:date_jour_3_initiale|texte_script:>','<:date_jour_4_initiale|texte_script:>',
 				'<:date_jour_5_initiale|texte_script:>','<:date_jour_6_initiale|texte_script:>','<:date_jour_7_initiale|texte_script:>'],
 			dateFormat: 'dd/mm/yy',
-			defaultDate: [(#ENV{valeur,#GET{date_min}})],
-			minDate: [(#ENV{valeur,#GET{date_min}})],
+			defaultDate: [(#ENV{valeur,#GET{date_min}}|affdate{d/m/Y})],
+			minDate: [(#ENV{valeur,#GET{date_min}}|affdate{d/m/Y})],
 			gotoCurrent: true,
 			beforeShowDay: disponible,
 			changeMonth: true,
