@@ -1,6 +1,7 @@
 <?php
 
 function verifier_dates_diponibles_dist($valeur, $options=array()){
+		include_spip('filtres/dates_outils');
 	if (is_array($valeur)) {
 		$date_debut = isset($valeur['date_debut']) ? $valeur['date_debut'] : (isset($valeur[0]) ? $valeur[0] : '' );
 		$date_fin = isset($valeur['date_fin']) ? $valeur['date_fin'] : (isset($valeur[1]) ? $valeur[1] : $date_debut);
@@ -8,8 +9,11 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 	else {
 		$date_debut = $date_fin = $valeur;
 	}
+
+	spip_log("$date_debut - $date_fin", 'teste');
 	$objet = isset($options['objet']) ? $options['objet'] : FALSE;
 	$id_objet = isset($options['id_objet']) ?  $options['id_objet'] : FALSE;
+
 
 	if ($date_debut and $date_fin and $objet and $id_objet) {
 		$horaire = isset($options['horaire']) ? $options['horaire'] : FALSE;
@@ -17,7 +21,9 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 		$utilisation_squelette = isset($options['utilisation_squelette']) ? $options['utilisation_squelette'] : FALSE;
 		$utilisation_id_exclu = isset($options['utilisation_id_exclu']) ? $options['utilisation_id_exclu'] : FALSE;
 
-		$intervalle = dates_intervalle($date_debut, $date_fin, 1, -1, $horaire, $format) ;
+		$debut = isset($options['debut']) ?  $options['debut'] : 0;
+		$fin = isset($options['fin']) ?  $options['fin'] : 0;
+		$intervalle = dates_intervalle($date_debut, $date_fin, $debut, $fin, $horaire, $format);
 
 		$disponible = dates_disponibles(
 			array(
@@ -43,7 +49,7 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 		}
 	}
 	else {
-		return 'Problèmes de variables, vérfiez votre fonction';
+		return 'Problèmes de variables, vérifiez votre fonction';
 	}
 
 }
