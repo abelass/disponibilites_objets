@@ -8,7 +8,14 @@
 		{tout}
 		{par num titre, titre}>
 			[(#DATE_DEBUT|!={#DATE_FIN}|?{
-				#SET{nombre_dates,#DATE_DEBUT|dates_intervalle{#DATE_FIN,#ENV{debut,0},#ENV{fin,0},#ENV{horaire},#ENV{format}}}
+				#SET{nombre_dates,#DATE_DEBUT|dates_intervalle{
+							#DATE_FIN,
+							#ENV{decalage_debut,0},
+							#ENV{decalage_fin,0},
+							#ENV{horaire},
+							#ENV{format},
+						}
+				}
 				#SET{dates,#GET{dates}|array_merge{#GET{nombre_dates}}}
 				,
 				[(#ENV{horaire}|?{
