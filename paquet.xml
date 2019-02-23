@@ -16,6 +16,10 @@
 
 	<licence>GNU/GPL v3</licence>
 
+	<traduire module="disponibilite_date" reference="fr" gestionnaire="salvatore" />
+	<traduire module="objets_disponibilites" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-objets_disponibilites" reference="fr" gestionnaire="salvatore" />
+
 
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
 	<necessite nom="verifier" compatibilite="[1.8.2;]" />
