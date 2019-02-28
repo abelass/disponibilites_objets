@@ -33,7 +33,7 @@ function verifier_dates_diponibles_dist($valeur, $options=array()){
 			$valeurs[$variable] = isset($options[$variable]) ? $options[$variable] : $valeur_defaut;
 		}
 
-		$intervalle = dates_intervalle($date_debut, $date_fin, 0, -1, $horaire, $format);
+		$intervalle = dates_intervalle($date_debut, $date_fin, 1, -1, $horaire, $format);
 
 		$disponible = dates_disponibles(array_merge(
 					$valeurs,
