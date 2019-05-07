@@ -1,5 +1,5 @@
 # Objets disponibles
-Permet de définir des disponibilités pour les objets
+Permet de définir des disponibilités pour vos objets
 
 ## Utilisation
 ### Configuration
