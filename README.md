@@ -1,4 +1,4 @@
-# Objets disponibles
+# Disponibilités objets
 Permet de définir des disponibilités pour vos objets
 
 ## Utilisation
