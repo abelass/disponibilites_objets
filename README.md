@@ -1,13 +1,18 @@
 # Disponibilités objets
 Permet de définir des disponibilités pour vos objets
 
+## Dépendances
+- [Saisies](https://plugins.spip.net/saisies.html)
+- [Vérifier](https://plugins.spip.net/verifier.html)
+- [Dates outils](https://plugins.spip.net/dates_outils.html)
+
 ## Utilisation
 ### Configuration
 Dans la configuration du plugin déclarez les objets pour lesquels vous voulez gérer
-des diponibilités.
+des disponibilités.
 
 ### Édition
-Vous pouvez alors définir pour ces objets des periodes de disponibilité ou de non
+Vous pouvez alors définir pour ces objets des périodes de disponibilité ou de non
 disponibilités.
 
 ### Squelettes
