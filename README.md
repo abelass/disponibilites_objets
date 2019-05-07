@@ -18,10 +18,10 @@ Ces saisies utilisent le filtre `dates_disponibles($options, $contexte)` qui pre
 les mêmes variables que les saisies et retourne un tableau avec les dates disponibles.
 
 ## Filtre
-Le filtre `dates_disponibles($options, $contexte = array())` qui calcules les dates disponibles pour un objet y déduit les non disponibles ainsi que les dates utilisées (par example dans le cadre d'une location avec le plugin
+Le filtre `dates_disponibles($options, $contexte = array())` calcule les dates disponibles pour un objet en déduit les non disponibles ainsi que les dates utilisées (par example dans le cadre d'une location avec le plugin
 [Objets Location](https://github.com/abelass/location_objets).
 
-Les calculs des dates disponibles et non disponibles se font dans des squelettes (voir dossier disponibilites), donc facilement modifiable. Pour les dates utilisées, s'il existe une fonction poersonnalisé pour l'objet `disponibilites_objetEnQuestion_utilise_dist()` celle-ci sera utilisé, sinon on recourt à la fonction par défaut `disponibilites_objet_utilise_dist()` qui se trouve dans le fichier `disponibilites/objet_utilise.php`.
+Les calculs des dates disponibles et non disponibles se font dans des squelettes (voir dossier disponibilites), donc facilement modifiable. Pour les dates utilisées, s'il existe une fonction personnalisé pour l'objet `disponibilites_objetEnQuestion_utilise_dist()` celle-ci sera utilisée, sinon on recourt à la fonction par défaut `disponibilites_objet_utilise_dist()` qui se trouve dans le fichier `disponibilites/objet_utilise.php`.
 
 
 ## to do
