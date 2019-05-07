@@ -17,7 +17,7 @@ disponibilités.
 
 ### Squelettes
 Dans l'état actuel, la manière principal d'affichage des dates disponibles est via
-les saisies `dates_disponibles` ou `dates_disponibles_select` (regardez dans le dossiers `saisies`), vous y trouverez des examples ainsi que toutes les variables utilisées.
+les saisies `dates_disponibles` ou `dates_disponibles_select` (regardez dans le dossiers `saisies`), vous y trouverez des exemples ainsi que toutes les variables utilisées.
 
 Ces saisies utilisent le filtre `dates_disponibles($options, $contexte)` qui prend
 les mêmes variables que les saisies et retourne un tableau avec les dates disponibles.
