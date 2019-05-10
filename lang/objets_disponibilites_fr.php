@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_parametrages' => 'Paramétrages',
-	'champ_chambres_objets' => 'Activer l’ajout d’informations extras sur les contenus :',
+	'champ_disponibilites_objets' => 'Activer l’ajout des disponibilités sur les contenus :',
 
 	// O
 	'objets_disponibilites_titre' => 'Disponibilites objets',
